@@ -10,6 +10,8 @@ void manpage()
     {
         run("yodl2man  -o " MANPAGE " "  PROJECT);
         run("yodl2html  -o ../../tmp/manhtml/" PROJECT ".1.html " PROJECT);
+        chdir("../..");
+        run("cp tmp/manhtml/" PROJECT ".1.html ../../wip");
     }
     exit(0);
 }

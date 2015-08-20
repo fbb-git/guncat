@@ -5,5 +5,6 @@ void special()
         system("touch version.cc");
         run("gcc -E VERSION.h | grep -v '#' | sed 's/\\\"//g' > "
                                                             "release.yo");
+        run("cp release.yo ../../wip");
     }
 }
