@@ -1,0 +1,6 @@
+#!/bin/bash
+
+(git co master; cd guncat; ./build man; git co gh-pages)
+
+yodl2html index.yo || exit 1
+
