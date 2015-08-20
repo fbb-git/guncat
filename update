@@ -1,6 +1,15 @@
 #!/bin/bash
 
-(git co master; cd guncat; ./build man; ./build distclean; git co gh-pages)
+echo -n "Need to (re)create wip/release.yo and wip/guncat.1.html [y/n] ? "
+read yesno
+
+if [ "$yesno" == "y" ] ; then
+    git co master; 
+    cd guncat; 
+    ./build man; 
+    ./build distclean; 
+    git co gh-pages
+fi
 
 yodl2html index.yo || exit 1
 
