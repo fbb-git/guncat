@@ -1,0 +1,25 @@
+guncat (0.92.00)
+
+  * The GPG passphrase is now requested only once. It is only requested again
+    if a provided passphrase was incorrect.
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Tue, 27 May 2014 15:57:34 +0200
+
+guncat (0.91.00)
+
+  * The GPG passphrase is read from /dev/tty, and not from the std. input
+    stream (cin) anymore
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Sun, 04 May 2014 10:55:53 +0200
+
+guncat (0.90.00)
+
+  * Initial completion of the program and man-page.
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Sat, 03 May 2014 11:48:43 +0200
+
+guncat (0.00.00)
+
+  * Preparing the sourceforge archive, and finalizing release 0.00.00
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Wed, 30 Apr 2014 15:10:18 +0200
