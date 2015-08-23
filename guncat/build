@@ -2,14 +2,26 @@
 
 #include "icmconf"
 
+string  g_home;
+string  g_logPath;
+list    g_logs;
+
 #include "icmake/setopt"
 #include "icmake/run"
 #include "icmake/md"
 #include "icmake/special"
+#include "icmake/readlog"
+#include "icmake/findkey"
+#include "icmake/valueof"
+#include "icmake/remove"
+#include "icmake/writelog"
+#include "icmake/update"
 
 #include "icmake/clean"
 #include "icmake/manpage"
 #include "icmake/install"
+#include "icmake/uninstall"
+#include "icmake/github"
 
 string  g_cwd = chdir("");  // initial working directory
 
@@ -17,6 +29,8 @@ void main(int argc, list argv)
 {
     string option;
     string strip;
+
+    g_home = getenv("HOME")[1] + "/";
 
     option = argv[1];
 
@@ -27,13 +41,16 @@ void main(int argc, list argv)
         clean(1);
 
     if (option == "install")
-        install(argv[2], argv[3]);
+        install(argv[2], argv[3], argv[4]);
+
+    if (option == "uninstall")
+        uninstall(argv[2]);
 
     if (option != "")
         special();
 
-    if (option == "sourceforge")
-        exit(0);
+    if (option == "github")
+        github();
 
     if (option == "man")
         manpage();
@@ -62,22 +79,37 @@ void main(int argc, list argv)
 
     printf("Usage: build [-p] what\n"
         "Where `what' is one of:\n"
-        "   clean                - clean up remnants of previous "
+        "   clean                      - clean up remnants of previous "
                                                             "compilations\n"
-        "   distclean            - clean + fully remove tmp/\n"
-        "   library              - build " PROJECT "'s library\n"
-        "   man                  - build the man-page (requires Yodl)\n"
-        "   program [strip]      - build " PROJECT " (optionally strip the\n"
-        "                          executable)\n"
-        "   oxref [strip]        - same a `program', also builds xref file\n"
-        "                          using oxref\n"
-        "   install program [path] - install the program at `path'\n"
-        "                          (by default below `" PROJECT "')\n"
-        "   install man [base]   - install the man pages below `base'\n"
-        "                          (by default below `" MAN "')\n"
-        "   install std [base]   - install standard docs below `base'\n"
-        "                          (by default below `" STD "')\n"
-        "   sourceforge          - prepare sourceforge's index update\n"
+        "   distclean                  - clean + fully remove tmp/\n"
+        "   library                    - build " PROJECT "'s library\n"
+        "   man                        - build the man-page (requires "
+                                                            "Yodl)\n"
+        "   program [strip]            - build " PROJECT " (optionally "
+                                                            "strip the\n"
+        "                                executable)\n"
+        "   oxref [strip]              - same a `program', also builds "
+                                                            "xref file\n"
+        "                                using oxref\n"
+        "\n"
+        "  Below [log] is the file logging the locations of installed files\n"
+        "  if empty, nothing is logged;  if -, the log file is " LOGFILE "\n"
+        "  otherwise the specified location (absolute, or relative to\n", 
+        "  ", g_home, ") is used\n"
+        "\n"
+        "   install program [fullpath] [log] - install " PROJECT ", \n"
+        "                                  by default `" BINARY "',\n"
+        "                                  otherwise as `fullpath'\n"
+        "   install man [base] [log]     - install the man pages below "
+                                                            "`base'\n"
+        "                                  (by default `./" MAN "')\n"
+        "   install std [base] [log]     - install standard docs below "
+                                                            "`base'\n"
+        "                                  (by default below `" STD "')\n"
+        "   uninstall log                - rm -rf all files in log and "
+                                                            "log itself\n"
+        "   github                       - prepare github's gh-pages update\n"
+        "                                  (internal use only)\n"
         "\n"
     );
     exit(1);

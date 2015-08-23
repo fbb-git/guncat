@@ -7,30 +7,56 @@ string setWhere(string where, string defaultWhere)
     return where;
 }
 
-void install(string what, string where)
+void install(string what, string where, string log)
 {
-    string path;
+    string path;                // the path of the binary program
+    string target;
+    list pathElements;
+
+    readlog(log);
 
     if (what == "program")
     {
-        if (where == "")
-            where = BINARY;
+        if (where == "")        // `where' is the path to the program
+        {
+            target = BINARY;    // by default BINARY
+            path = get_path(target);
+        }
+        else
+        {
+            target = where;     // a specific destination was specified
+            if (sizeof(makelist(O_DIR, target)) == 0)   // a filename?
+                path = get_path(target);                // get the directory
+            else
+            {
+                printf("build install program PATH: PATH must be the "
+                        "full path to a program\n");
+                exit(0);
+            }
+        }
+        md(path);
 
-        path = get_path(where);
-        if (path != "")
-            md(path);
+        printf("  INSTALLING `", target, "'\n");
+        run("icmbuild install program " + target);
 
-        printf("  INSTALLING the executable `", where, "'\n");
-        run("icmbuild install program " + where);
+        update("program", target);      // remove existing program
+                                        // unless it is 'where'
+                                        // and add new 'where' entry
+        update("directory", path);      // remove existing dir, unless it is
+                                        // path and unless it contains files,
+                                        // and add new 'path' entry
+        writeLog();
         exit(0);
     }
 
     if (what == "man")
     {
         where = setWhere(where, MAN);
-
-        printf("  INSTALLING the manual page at `", where, "'\n");
-        run("gzip -9 < tmp/man/" PROJECT ".1 > " + where + "/" PROJECT ".1.gz");
+        target = where + "/" PROJECT ".1.gz";
+        printf("  INSTALLING `", target, "'\n");
+        run("gzip -9 < tmp/man/" PROJECT ".1 > " + target);
+        update("man", target);
+        writeLog();
         exit(0);
     }
 
@@ -38,15 +64,22 @@ void install(string what, string where)
     {
         where = setWhere(where, STD);
 
-        printf("  INSTALLING the changelog at `", where, "\n");
-        run("gzip -9 < changelog > " + where + "/changelog.gz");
-    
-        printf("  INSTALLING the html-manual page at `", where, "'\n");
-        run("cp tmp/manhtml/" PROJECT ".1.html " + where);
+        target = where + "/changelog.gz";
+        printf("  INSTALLING `", target, "'\n");
+        run("gzip -9 < changelog > " + target);
+        update("changelog", target);
 
-        printf("  INSTALLING README at `", where, "\n");
+        target = where + "/" + PROJECT ".1.html";
+        printf("  INSTALLING `", target, "'\n");
+        run("cp tmp/manhtml/" PROJECT ".1.html " + where);
+        update("manhtml", target);
+
+        target = where + "/README";
+        printf("  INSTALLING `", target, "'\n");
         run("cp README " + where);
- 
+        update("README", target);
+        writeLog();
+
         exit(0);
     }
 

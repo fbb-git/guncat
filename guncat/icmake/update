@@ -1,0 +1,37 @@
+// remove existing key-value, unless it equals 'what', and add new key-value
+// to g_logs. If key == "directory' and it should be removed, but is not empty
+// don't remove but show a warning
+
+void update(string key, string what)
+{
+    string value;
+    int idx;
+    int dir;
+
+    dir =   key == "directory";
+
+    key += " ";
+
+    idx = findkey(key, -1);         // find the element in g_logs
+
+    if (idx == -1)                  // no such value in the logs
+        g_logs += (list)(key + what);   // add a new element
+    else                            // OR: the logs contain the key
+    {
+        value = valueOf(idx, key);
+        
+        if (value == what)          // same thing: nothing to remove
+            return;
+
+            // OR: change the entry
+
+        remove(dir, value);
+        g_logs -= (list)(key + value);  // update the current entry
+        g_logs += (list)(key + what);
+    }
+}
+
+    
+
+
+

@@ -1,0 +1,21 @@
+void uninstall(string log)
+{
+    string key;
+    int idx;
+
+    readlog(log);
+
+    for (idx = sizeof(g_logs); idx--; )
+    {
+        key = strtok(g_logs[idx], " ")[0];
+        remove(key == "directory", valueOf(idx, key + " "));
+    }
+     
+    run("rm -f " + g_logPath);
+   
+    exit(0);
+}
+
+
+
+

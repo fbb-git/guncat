@@ -1,0 +1,16 @@
+void writeLog()
+{
+    int idx;
+
+    if (g_logPath == "")
+        return;
+
+    run("rm -f " + g_logPath);
+
+    for (idx = sizeof(g_logs); idx--; )
+        fprintf(g_logPath, g_logs[idx], "\n");
+}
+
+
+
+

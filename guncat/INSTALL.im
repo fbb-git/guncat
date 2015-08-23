@@ -28,9 +28,5 @@
 #define STD     "/usr/share/doc/"${PROJECT}
     // the directory where the standard documentation is stored 
 
-
-
-
-
-
-
+#define LOGFILE     "." ${PROJECT}
+    // the file storing the locations of installed files

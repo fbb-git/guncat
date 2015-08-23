@@ -1,0 +1,10 @@
+void remove(int isDir, string value)
+{
+    if (isDir == 0)                  // removing a file
+        run("rm -f " + value);   
+    else                            // or removing an empty directory
+    {
+        if (system(P_NOCHECK, "rmdir " + value) != 0)
+            printf("not removing non-empty directory `", value, "'\n");
+    }   
+}
