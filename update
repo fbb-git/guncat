@@ -5,13 +5,22 @@ read yesno
 
 if [ "$yesno" == "y" ] ; then
     git co master; 
-    cd guncat; 
-    ./build man; 
-    ./build distclean; 
+    cd guncat
+    ./build man 
+    ./build std
+    ./build github
+    ./build distclean
     git co gh-pages
 fi
 
-yodl2html index.yo || exit 1
+cp -r ../wip/changelog.txt ../wip/${_product_}.1.html .
+
+yodl2html index.yo || exit 1	
+
+echo "Running 'git st': no untracked files or ignorable files should be shown"
+git st
+
+echo
 
 echo -n "ci change to index.html etc., push the result and co master [y/n] ? "
 read yesno

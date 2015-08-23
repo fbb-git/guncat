@@ -1,4 +1,10 @@
+SUBST(_project_)(guncat)
+SUBST(_Product_)(Guncat)
+SUBST(_product_)(guncat)
+SUBST(_image_)(guncat.jpg)
+
 includefile(../wip/release.yo)
+
 
 mailto(f.b.brokken@rug.nl)
 
@@ -9,23 +15,27 @@ notableofcontents()
 htmlstyle(.centered)(margin:0px auto;display:block)
 htmlstyle(body)(color: #27408B; background: #FFFAF0)
 
-report(Guncat V _CurVers_)
+report(_Product_ V _CurVers_)
       (Frank B. Brokken (f.b.brokken@rug.nl)nl())
       (_CurYrs_)
 
 htmlcommand(
-    <img class="centered", src="guncat.jpg" border="0" alt="guncat Image" />
+    <img class="centered", src="_image_" border="0" alt="_Product_ Image" />
 )
 
-This is the main page of the guncat project hosted on GitHub.com.
+This is the main page of the _Product_ project hosted at GitHub.com.
 
-The project's repository can be reached at
-lurl(https://github.com/fbb-git/guncat).
 
-The following releases are available (to obtain, either check out a release
+The project's repository can be reached at 
+lurl(https://github.com/fbb-git/_project_).
+
+
+COMMENT(The five most recent...)
+The most recent releases are (to obtain, either check out a release
 by its tag or download the matching tt(.zip) or tt(.tar.gz) from
-lurl(https://github.com/fbb-git/guncat/releases) or direct from its 
+lurl(https://github.com/fbb-git/_project_/releases) or direct from its 
 release page):
+
         itemization(
         it() url(0.92.00)
                     (https://github.com/fbb-git/guncat/releases/tag/0.92.00)
@@ -37,9 +47,14 @@ May 4, 2014;
                     (https://github.com/fbb-git/guncat/releases/tag/0.90.00),
 May 3, 2014.
         )
+    COMMENT(NOTE: LAST ITEM SHOULD END IN . )
 
+
+    Additional information about _product_:
     itemization(
-    it() Here is the url(html-version of the guncat man-page)(guncat.1.html).
+    it() The url(html-version of the _Product_ man-page)
+                (_product_.1.html).
+    it() The complete url(_Product_ changelog)(changelog.txt).
     )
 
 Enjoy guncat !
