@@ -1,0 +1,25 @@
+# guncat
+
+Guncat  was  designed to tackle a problem encountered with (partially)
+PGP encrypted files (which may be  encountered  in,  e.g.,  mailboxes).
+Tools  to  process text-files (like grep(1), or less(1)) may be used to
+process those files, but standard tools like cat(1) leave PGP encrypted
+sections within such files as-is. As a consequence, browsing the `real'
+contents (i.e., clear-text sections and the unencrypted contents of PGP
+encrypted sections) of those files is difficult.
+
+Guncat  acts like cat, but unencrypts encrypted sections encountered in
+the files processed by guncat, copying the unencrypted  information  to
+guncat's  standard  output  stream, which may thereupon be processed by
+other tools.
+
+
+To create the program from its sources, either descend into the guncat
+directory, or unpack a created archive, cd into its top-level directory 
+and follow the instructions provided in the INSTALL file found there.
+
+Alternatively, binary ready-to-install versions of the guncat program are
+available in verious Linux distributions, in particular Debian. See, e.g.,
+https://packages.debian.org/search?keywords=guncat&searchon=names&suite=all&section=all
+
+Github's web-pages for guncat are here: https://fbb-git.github.io/guncat/
