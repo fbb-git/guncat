@@ -1,7 +1,6 @@
 void github()
 {
-    run("cp -r release.yo tmp/manhtml/bisonc++man.html "
-        "../../wip");
+    run("cp -r release.yo tmp/manhtml/github.1.html ../../wip");
     run("cp changelog ../../wip/changelog.txt");
     exit(0);
 }
