@@ -10,6 +10,7 @@ if [ "$yesno" == "y" ] ; then
     ./build std
     ./build github
     ./build distclean
+    cd ..
     git co gh-pages
 fi
 
