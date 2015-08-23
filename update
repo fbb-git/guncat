@@ -7,7 +7,6 @@ if [ "$yesno" == "y" ] ; then
     git co master; 
     cd guncat
     ./build man 
-    ./build std
     ./build github
     ./build distclean
     cd ..
