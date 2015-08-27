@@ -1,31 +1,30 @@
 #!/usr/bin/icmake -qt/tmp/guncat
 
+#define LOGENV "GUNCAT"
+
 #include "icmconf"
 
-string  g_home;
 list    g_log;
+
+string  g_logPath = getenv(LOGENV)[1];
 
 #include "icmake/setopt"
 #include "icmake/run"
 #include "icmake/md"
 #include "icmake/special"
+
 #include "icmake/md5sum"
 #include "icmake/log"
 #include "icmake/readlog"
 #include "icmake/writelog"
-
 #include "icmake/adddir"
 #include "icmake/removedir"
-
-// #include "icmake/findkey"
-// #include "icmake/valueof"
 #include "icmake/remove"
-// #include "icmake/update"
+#include "icmake/uninstall"
 
 #include "icmake/clean"
 #include "icmake/manpage"
 #include "icmake/install"
-#include "icmake/uninstall"
 #include "icmake/github"
 
 string  g_cwd = chdir("");  // initial working directory
@@ -34,8 +33,6 @@ void main(int argc, list argv)
 {
     string option;
     string strip;
-
-    g_home = getenv("HOME")[1] + "/";
 
     option = argv[1];
 

@@ -2,11 +2,11 @@ void writeLog()
 {
     int idx;
 
-    if (UNINSTALL == "")            // do not store uninstall info
+    if (g_logPath == "")            // do not store uninstall info
         return;
 
     for (idx = sizeof(g_log); idx--; )
-        fprintf(UNINSTALL, g_log[idx], "\n");
+        fprintf(g_logPath, g_log[idx], "\n");
 }
 
 

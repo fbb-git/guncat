@@ -1,8 +1,13 @@
 guncat (1.01.00)    ********* ISN ***********
 
-  * Added 'build uninstall'. This command required UNINSTALL (in INSTALL.im)
-    to contain the absolute filename of a file logging installed files and
-    directories. See INSTALL.im for details.
+  * Added 'build uninstall'. This command only works if, when calling one of
+    the 'build install' alternatives and when calling 'build uninstall' the
+    environment variable GUNCAT contains the (preferably absolute) filename of
+    a file on which installed files and directories are logged. 
+    Note that 'build (dist)clean' does not remove the file pointed at by the
+    GUNCAT environment variable, unless that file happpens to be in a
+    directory removed by 'build (dist)clean'.
+    Defining the GUNCAT environment variable as ~/.guncat usually works well.
 
 guncat (0.92.00)
 

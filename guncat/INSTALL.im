@@ -1,11 +1,6 @@
     // Specify the name of the project:
 #define PROJECT             "guncat"
 
-    // Specify the absolute filename of the file containing all installed 
-    // files. If empty, the installed files are not separately registered
-    // and 'build uninstall' won't work
-#define UNINSTALL           "/tmp/"${PROJECT}".log"
-
     // When defined, these overrule COMPILER and COMPILER_OPTIONS
     // COMPILER and COMPILER_OPTIONS are now obsolete
     // Instead of CXX and CXXFLAGS, CC and CFLAGS can be used.
