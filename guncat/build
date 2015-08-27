@@ -3,19 +3,24 @@
 #include "icmconf"
 
 string  g_home;
-string  g_logPath;
-list    g_logs;
+list    g_log;
 
 #include "icmake/setopt"
 #include "icmake/run"
 #include "icmake/md"
 #include "icmake/special"
+#include "icmake/md5sum"
+#include "icmake/log"
 #include "icmake/readlog"
-#include "icmake/findkey"
-#include "icmake/valueof"
-#include "icmake/remove"
 #include "icmake/writelog"
-#include "icmake/update"
+
+#include "icmake/adddir"
+#include "icmake/removedir"
+
+// #include "icmake/findkey"
+// #include "icmake/valueof"
+#include "icmake/remove"
+// #include "icmake/update"
 
 #include "icmake/clean"
 #include "icmake/manpage"
@@ -41,10 +46,10 @@ void main(int argc, list argv)
         clean(1);
 
     if (option == "install")
-        install(argv[2], argv[3], argv[4]);
+        install(argv[2], argv[3]);
 
     if (option == "uninstall")
-        uninstall(argv[2]);
+        uninstall();
 
     if (option != "")
         special();
@@ -92,26 +97,19 @@ void main(int argc, list argv)
                                                             "xref file\n"
         "                                using oxref\n"
         "\n"
-        "  Below [log] is the file logging the locations of installed files\n"
-        "  if empty, nothing is logged;  if -, the log file is " LOGFILE "\n"
-        "  otherwise the specified location (absolute, or relative to\n", 
-        "  ", g_home, ") is used\n"
-        "\n"
-        "   install program [fullpath] [log] - install " PROJECT ", \n"
-        "                                  by default `" BINARY "',\n"
-        "                                  otherwise as `fullpath'\n"
-        "   install man [base] [log]     - install the man pages below "
+        "   install program [fullpath]  - install " PROJECT ", \n"
+        "                                 by default `" BINARY "',\n"
+        "                                 otherwise as `fullpath'\n"
+        "   install man [base]          - install the man pages below "
                                                             "`base'\n"
-        "                                  (by default `./" MAN "')\n"
-        "   install std [base] [log]     - install standard docs below "
+        "                                 (by default `./" MAN "')\n"
+        "   install std [base]          - install standard docs below "
                                                             "`base'\n"
-        "                                  (by default `./" STD "')\n"
-        "   uninstall log                - remove all files and empty "
+        "                                 (by default `./" STD "')\n"
+        "   uninstall                   - remove installed files and empty "
                                                             "directories\n"
-        "                                  mentioned in log as well as "
-                                                            "log itself\n"
-        "   github                       - prepare github's gh-pages update\n"
-        "                                  (internal use only)\n"
+        "   github                      - prepare github's gh-pages update\n"
+        "                                 (internal use only)\n"
         "\n"
     );
     exit(1);

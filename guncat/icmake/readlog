@@ -1,33 +1,9 @@
-string _getlog(string log)
+void readlog()
 {
-    if (log == "-")                 // use LOGFILE fm INSTALL.im
-        log = LOGFILE;
-    
-    if (log[0] != "/")              // if a relative name, prefix $HOME
-        log = g_home + log;
+    list line;
 
-    return log;
-}
-
-void readlog(string log)            // log: provided logfile name
-{
-    list line;                      // lines read from the logfile
-
-    string entries;                 // the returned logfile contains:
-                                    // empty: no elements, otherwise
-                                    // elements separated by \n, each element
-                                    // has two parts, separated by blanks:
-                                    // 1st part: key, 2nd part: value
-
-    if (log == "")                  // don't use a logfile
-        return;
-
-    g_logPath = _getlog(log);       // get the absolute path of the logfile
-
-    while (line = fgets(g_logPath, (int)line[1]))
-        entries += line[0];         // obtain all entries (if any)
-
-    g_logs = strtok(entries, "\n"); // elements of the log file
+    while (line = fgets(UNINSTALL, (int)line[1]))
+        g_log += strtok(line[0], "\n");     // add logfile entries w/o \n
 }
 
 

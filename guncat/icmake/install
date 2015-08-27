@@ -7,13 +7,11 @@ string setWhere(string where, string defaultWhere)
     return where;
 }
 
-void install(string what, string where, string log)
+void install(string what, string where)
 {
     string path;                // the path of the binary program
     string target;
     list pathElements;
-
-    readlog(log);
 
     if (what == "program")
     {
@@ -37,14 +35,10 @@ void install(string what, string where, string log)
         md(path);
 
         printf("  INSTALLING `", target, "'\n");
-        run("icmbuild install program " + target);
 
-        update("program", target);      // remove existing program
-                                        // unless it is 'where'
-                                        // and add new 'where' entry
-        update("directory", path);      // remove existing dir, unless it is
-                                        // path and unless it contains files,
-                                        // and add new 'path' entry
+        run("icmbuild install program " + target);
+        log(target);
+        
         writeLog();
         exit(0);
     }
@@ -55,7 +49,8 @@ void install(string what, string where, string log)
         target = where + "/" PROJECT ".1.gz";
         printf("  INSTALLING `", target, "'\n");
         run("gzip -9 < tmp/man/" PROJECT ".1 > " + target);
-        update("man", target);
+        log(target);
+
         writeLog();
         exit(0);
     }
@@ -67,19 +62,19 @@ void install(string what, string where, string log)
         target = where + "/changelog.gz";
         printf("  INSTALLING `", target, "'\n");
         run("gzip -9 < changelog > " + target);
-        update("changelog", target);
+        log(target);
 
         target = where + "/" + PROJECT ".1.html";
         printf("  INSTALLING `", target, "'\n");
         run("cp tmp/manhtml/" PROJECT ".1.html " + where);
-        update("manhtml", target);
+        log(target);
 
         target = where + "/README";
         printf("  INSTALLING `", target, "'\n");
         run("cp README " + where);
-        update("README", target);
-        writeLog();
+        log(target);
 
+        writeLog();
         exit(0);
     }
 

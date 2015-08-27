@@ -1,3 +1,9 @@
+guncat (1.01.00)    ********* ISN ***********
+
+  * Added 'build uninstall'. This command required UNINSTALL (in INSTALL.im)
+    to contain the absolute filename of a file logging installed files and
+    directories. See INSTALL.im for details.
+
 guncat (0.92.00)
 
   * The GPG passphrase is now requested only once. It is only requested again

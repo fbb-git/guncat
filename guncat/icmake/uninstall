@@ -1,21 +1,30 @@
-void uninstall(string log)
+void uninstall()
 {
     string key;
     int idx;
+    list entry;
+    list dir;
 
-    readlog(log);
+    if (UNINSTALL == "")            // do not store uninstall info
+        return;
 
-    for (idx = sizeof(g_logs); idx--; )
+    readlog();
+
+    for (idx = sizeof(g_log); idx--; ) // separate dir from file
     {
-        key = strtok(g_logs[idx], " ")[0];
-        remove(key == "directory", valueOf(idx, key + " "));
+        entry = strtok(g_log[idx], " \n");
+
+        if (entry[0] == "dir")
+            dir = addDir(dir, entry[1]);
+        else
+            remove(entry);
     }
-     
-    run("rm -f " + g_logPath);
-   
+
+    for (idx = sizeof(dir); idx--; )
+        removeDir(dir[idx]);
+
+    echo(ON);
+    run("rm " UNINSTALL);
+
     exit(0);
 }
-
-
-
-
