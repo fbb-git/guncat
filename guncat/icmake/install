@@ -9,36 +9,29 @@ string setWhere(string where, string defaultWhere)
 
 void install(string what, string where)
 {
-    string path;                // the path of the binary program
     string target;
     list pathElements;
 
     if (what == "program")
     {
         if (where == "")        // `where' is the path to the program
-        {
-            target = BINARY;    // by default BINARY
-            path = get_path(target);
-        }
-        else
-        {
-            target = where;     // a specific destination was specified
-            if (sizeof(makelist(O_DIR, target)) == 0)   // a filename?
-                path = get_path(target);                // get the directory
-            else
-            {
-                printf("build install program PATH: PATH must be the "
-                        "full path to a program\n");
-                exit(0);
-            }
-        }
-        md(path);
+            where = BINARY;     // by default BINARY
 
-        printf("  INSTALLING `", target, "'\n");
+//        if (sizeof(makelist(O_DIR, where)) == 0)    // a filename?
+//              path = get_path(where);                 // get the directory
+//        else
+//        {
+//            printf("build install program PATH: PATH must be the "
+//                    "full path to a program\n");
+//            exit(0);
+//        }
 
-        run("icmbuild install program " + target);
-        log(target);
-        
+        md(get_path(where));
+
+        printf("  INSTALLING `", where, "'\n");
+        run("icmbuild install program " + where);
+        log(where);
+
         writeLog();
         exit(0);
     }
