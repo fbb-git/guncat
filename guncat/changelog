@@ -1,4 +1,4 @@
-guncat (1.01.00)    ********* ISN ***********
+guncat (1.01.00)    NT YET TAGGED
 
   * Added 'build uninstall'. This command only works if, when calling one of
     the 'build install' alternatives and when calling 'build uninstall' the

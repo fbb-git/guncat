@@ -1,77 +1,36 @@
-string setWhere(string where, string defaultWhere)
-{
-    if (where == "")
-        where = defaultWhere;
-
-    md(where);
-    return where;
-}
-
-void install(string what, string where)
+void install(string base)
 {
     string target;
     list pathElements;
 
-    if (what == "program")
-    {
-        if (where == "")        // `where' is the path to the program
-            where = BINARY;     // by default BINARY
+    g_installing = 1;
 
-//        if (sizeof(makelist(O_DIR, where)) == 0)    // a filename?
-//              path = get_path(where);                 // get the directory
-//        else
-//        {
-//            printf("build install program PATH: PATH must be the "
-//                    "full path to a program\n");
-//            exit(0);
-//        }
+#ifdef BINARY
+    target = base + BINARY;
+    printf("  installing the executable `", target + PROGRAM "'\n");
+    logFile("tmp/bin", "binary", target, PROGRAM);
+#endif
 
-        md(get_path(where));
+#ifdef MAN
+    target = base + MAN;
+    printf("  installing the manual pages below `", target, "'\n");
+    
+    logZip("tmp/man", PROGRAM".1", target + "/man1");
 
-        printf("  INSTALLING `", where, "'\n");
-        run("icmbuild install program " + where);
-        log(where);
+#endif
 
-        writeLog();
-        exit(0);
-    }
+#ifdef STD
+    target = base + STD;
+    printf("  installing README and the changelog at `", target, "\n");
+    logZip("", "changelog README", target);
 
-    if (what == "man")
-    {
-        where = setWhere(where, MAN);
-        target = where + "/" PROJECT ".1.gz";
-        printf("  INSTALLING `", target, "'\n");
-        run("gzip -9 < tmp/man/" PROJECT ".1 > " + target);
-        log(target);
+    #ifdef MAN
+        printf("  installing the html-manual pages at `", target, "\n");
+        logInstall("tmp/manhtml", "", target);
+    #endif
+#endif
 
-        writeLog();
-        exit(0);
-    }
-
-    if (what == "std")
-    {
-        where = setWhere(where, STD);
-
-        target = where + "/changelog.gz";
-        printf("  INSTALLING `", target, "'\n");
-        run("gzip -9 < changelog > " + target);
-        log(target);
-
-        target = where + "/" + PROJECT ".1.html";
-        printf("  INSTALLING `", target, "'\n");
-        run("cp tmp/manhtml/" PROJECT ".1.html " + where);
-        log(target);
-
-        target = where + "/README";
-        printf("  INSTALLING `", target, "'\n");
-        run("cp README " + where);
-        log(target);
-
-        writeLog();
-        exit(0);
-    }
-
-    exit(0);
+    writeLog();
 }
 
 

@@ -1,33 +1,48 @@
-    // Specify the name of the project:
-#define PROJECT             "guncat"
+    // The name of the program and the support directories as installed by
+    // the 'build install' command. Normally there is no reason for changing
+    // this #define
+#define PROGRAM             "guncat"
 
-    // When defined, these overrule COMPILER and COMPILER_OPTIONS
-    // COMPILER and COMPILER_OPTIONS are now obsolete
-    // Instead of CXX and CXXFLAGS, CC and CFLAGS can be used.
-    // Their #define values are overruled by identically named environment
-    // variables. 
 
-#define CXX                 "g++"
+    // The CXX, CXXFLAGS, and LDFLAGS #defines are overruled by identically
+    // named environment variables:
+
     // the compiler to use. 
+#define CXX                 "g++"
 
-//          consider adding -g to include debug info
-#define CXXFLAGS            "--std=c++14 -Wall -O2"
     // the compiler options to use.
+#define CXXFLAGS            "--std=c++14 -Wall -O2 -fdiagnostics-color=never"
 
-#define LDFLAGS             ""
     // flags passed to the linker
+#define LDFLAGS             ""
+
+
+    // The following /bin/cp option is used to keep, rather than follow
+    // symbolic references. If your installation doesn't support these flags,
+    // then change them into available ones.
+    //   -P, --no-dereference
+    //            never follow symbolic links in SOURCE
+    //   --preserve[=ATTR_LIST]
+    //          preserve   the   specified   attributes   (default:  
+    //          mode,ownership,timestamps), if possible  additional  
+    //          attributes:  context, links, all
+    //   -d     same as --no-dereference --preserve=links
+#define CPOPTS  "-d"
+
 
 // =========================================================================
-// The following locations are overruled by `build install' arguments
+// Deactivate (e.g., use //#define ...) the following #defines to prevent
+// installation of the indicated component by 'build install'
+// 'build install base' can be used to specify a base directory below which
+// all components are installed (e.g., guncat is then installed in
+// 'base + BINARY')
+// =========================================================================
 
-#define BINARY     "/usr/bin/"${PROJECT}
-    // the full path of the final program
+    // the directory where guncat is installed
+#define BINARY     "/usr/bin"
 
-#define MAN     "/usr/share/man/man1"
     // the directory whre the manual page is stored
+#define MAN     "/usr/share/man/man1"
 
-#define STD     "/usr/share/doc/"${PROJECT}
     // the directory where the standard documentation is stored 
-
-#define LOGFILE     "." ${PROJECT}
-    // the file storing the locations of installed files
+#define STD     "/usr/share/doc/"${PROGRAM}
