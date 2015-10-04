@@ -1,3 +1,18 @@
+guncat (1.01.00)
+
+ * Update to version 1.00.00 after being operational for over one year without
+   issues. 
+
+ * Added 'build uninstall'. 
+
+ * Updated  'INSTALL'
+
+ * Guncat depends on libbobcat >= 4.00.00 (see 'required')
+
+ * Standardized the (de)installation procedures
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Sun, 04 Oct 2015 10:32:32 +0200
+
 guncat (0.92.00)
 
   * The GPG passphrase is now requested only once. It is only requested again

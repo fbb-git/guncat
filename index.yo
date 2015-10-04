@@ -37,6 +37,9 @@ lurl(https://github.com/fbb-git/_project_/releases) or direct from its
 release page):
 
         itemization(
+        it() url(1.01.00)
+                    (https://github.com/fbb-git/guncat/releases/tag/1.01.00)
+Oct  4, 2015;
         it() url(0.92.00)
                     (https://github.com/fbb-git/guncat/releases/tag/0.92.00)
 May 27, 2014;
