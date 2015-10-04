@@ -1,13 +1,17 @@
-guncat (1.01.00)    NT YET TAGGED
+guncat (1.01.00)
 
-  * Added 'build uninstall'. This command only works if, when calling one of
-    the 'build install' alternatives and when calling 'build uninstall' the
-    environment variable GUNCAT contains the (preferably absolute) filename of
-    a file on which installed files and directories are logged. 
-    Note that 'build (dist)clean' does not remove the file pointed at by the
-    GUNCAT environment variable, unless that file happpens to be in a
-    directory removed by 'build (dist)clean'.
-    Defining the GUNCAT environment variable as ~/.guncat usually works well.
+ * Update to version 1.00.00 after being operational for over one year without
+   issues. 
+
+ * Added 'build uninstall'. 
+
+ * Updated  'INSTALL'
+
+ * Guncat depends on libbobcat >= 4.00.00 (see 'required')
+
+ * Standardized the (de)installation procedures
+
+ -- Frank B. Brokken <f.b.brokken@rug.nl>  Sun, 04 Oct 2015 10:32:32 +0200
 
 guncat (0.92.00)
 
