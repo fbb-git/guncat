@@ -19,7 +19,7 @@ if [ "$yesno" == "y" ] ; then
     cd ..
     git co gh-pages
 
-    cp -r ../wip/changelog.txt ../wip/${_product_}.1.html .
+    cp -r ../wip/changelog.txt ../wip/guncat.1.html .
 fi
 echo
 echo -n "Check index.yo: version and last 5 releases [y/n] ? "
