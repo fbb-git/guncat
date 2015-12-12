@@ -16,18 +16,6 @@
     // process 
 #define CLS
 
-    // The compiler to use. Define CC instead if a C compiler should be used.
-#define CXX            "g++"
-
-    // The compiler options to use. Define CFLAGS instead if a C compiler is
-    // used.
-#ifndef CXXFLAGS
-#define CXXFLAGS        " --std=c++0x -Wall -O2"
-#endif
-
-    // Options passed to the linker:
-#define LDFLAGS         ""
-
     // Uncomment to construct a library. Optionally use another name (don't
     // use lib or an extension like .a)
 #define LIBRARY           "modules"
